@@ -2,7 +2,8 @@ var ObjectID = require('mongodb').ObjectID;
 
 module.exports = function(app, db) {
   app.post('/users', (req, res) => {
-    console.log(req.body);
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     const user = {
       name: req.body.name,
       username: req.body.username,
@@ -24,6 +25,8 @@ module.exports = function(app, db) {
     });
   });
   app.get('/users/:id', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     const id = req.params.id;
     const details = { '_id': new ObjectID(id) };
     db.collection('users').findOne(details, (err, item) => {
@@ -35,11 +38,15 @@ module.exports = function(app, db) {
     });
   });
   app.get('/users', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     db.collection('users').find().toArray((err, users) => {
       res.send(users);
     });
   });
   app.delete('/users/:id', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     const id = req.params.id;
     const details = { '_id': new ObjectID(id) };
     db.collection('users').remove(details, (err, item) => {
@@ -51,6 +58,8 @@ module.exports = function(app, db) {
     });
   });
   app.put ('/users/:id', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     const id = req.params.id;
     const details = { '_id': new ObjectID(id) };
     const user = {
