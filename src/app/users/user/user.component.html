@@ -1,0 +1,19 @@
+<div>
+  <i class="material-icons circle red">account_circle</i>
+<span [appPopup]="color" class="title">{{user.name}}</span>
+  <a
+    class="btn btn-floating right btn-large cyan margin-left"
+    (click)='moreInf()'
+  >
+    <i class="material-icons">edit</i>
+  </a>
+  <a
+    class="btn btn-floating right btn-large cyan margin-left"
+    (click)='deleteUserHandler()'
+  >
+    <i class="material-icons">delete</i>
+  </a>
+  <p>{{user.username}}<br>
+      {{user.email}}
+  </p>
+</div>

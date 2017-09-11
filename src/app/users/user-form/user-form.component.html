@@ -1,0 +1,116 @@
+<div class="section container">
+  <div class="row">
+    <div class="input-field col s6">
+      <input 
+        id="name"
+        type="text"
+        class="validate"
+        [(ngModel)]="user.name"
+        placeholder="Placeholder"
+      >
+      <label class="active" for="name">Name</label>
+    </div>
+    <div class="input-field col s6">
+      <input
+        id="username"
+        type="text"
+        class="validate"
+        [(ngModel)]="user.username"
+        placeholder="Placeholder"
+      >
+      <label class="active" for="username">Username</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s6">
+      <input
+        id="phone"
+        type="text"
+        class="validate"
+        [(ngModel)]="user.phone"
+        placeholder="Placeholder"
+      >
+      <label class="active" for="phone">Phone</label>
+    </div>
+    <div class="input-field col s6">
+      <input
+        id="email"
+        type="email"
+        class="validate"
+        [(ngModel)]="user.email"
+        placeholder="Placeholder"
+      >
+      <label class="active" for="email">Email</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s6">
+      <input
+        id="website"
+        type="text"
+        class="validate"
+        [(ngModel)]="user.website"
+        placeholder="Placeholder"
+      >
+      <label class="active" for="website">Website</label>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <p title="ffe" style="font-weight: bold">Address:</p>
+  <div class="row">
+    <div class="input-field col s6">
+      <input
+        id="city"
+        type="text"
+        class="validate"
+        [(ngModel)]="user.address.city"
+        placeholder="Placeholder"
+      >
+      <label class="active" for="city">City</label>
+    </div>
+    <div class="input-field col s6">
+      <input
+        id="street"
+        type="text"
+        class="validate"
+        [(ngModel)]="user.address.street"
+        placeholder="Placeholder"
+      >
+      <label class="active" for="street">Street</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s6">
+      <input
+        id="zipcode"
+        type="text"
+        class="validate"
+        [(ngModel)]="user.address.zipcode"
+        placeholder="Placeholder"
+      >
+      <label class="active" for="zipcode">Zipcode</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s4">
+      <button
+        class="btn waves-effect waves-light"
+        type="submit"
+        name="action"
+        (click)="saveUser()"
+      >
+        {{user._id ? 'Edit': 'Save'}}
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+    <div class="col s4">
+      <a
+        class="waves-effect waves-light btn"
+        (click)="goBack()"
+      >
+        <i class="material-icons left">keyboard_backspace</i>
+        Back
+      </a>
+    </div>
+  </div>
+</div>

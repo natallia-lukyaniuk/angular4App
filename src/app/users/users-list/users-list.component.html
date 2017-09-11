@@ -1,0 +1,19 @@
+<div class="container">
+  <app-search></app-search>
+  <div class="section row">
+    <div
+      class="col s11"
+      (click)="addUser()"
+    >
+      <a class="btn-floating waves-effect waves-light btn cyan"><i class="material-icons right">add</i></a>
+    </div>
+  </div>
+  <ul class="collection">
+    <li class="collection-item avatar" *ngFor='let user of displayedUsers'>
+      <app-user
+        (deleteUser)='deleteUser($event)'
+        [user]='user'>
+      </app-user>
+    </li>
+  </ul>
+</div>
