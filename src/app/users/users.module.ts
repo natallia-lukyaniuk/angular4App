@@ -6,7 +6,7 @@ import {UsersService, DialogService} from '../services';
 import { FormsModule } from '@angular/forms';
 import {NgRedux, NgReduxModule, DevToolsExtension } from 'ng2-redux';
 import {IAppState, rootReducer, INITIAL_STATE} from '../store';
-import {PopupDirective} from '../popup.directive';
+import {PaginationComponent} from '../pagination/pagination.component';
 
 @NgModule({
   imports: [
@@ -19,7 +19,7 @@ import {PopupDirective} from '../popup.directive';
     usersRouterComponents,
     UserComponent,
     SearchComponent,
-    PopupDirective
+    PaginationComponent
   ],
   providers: [UsersService, DialogService]
 })
@@ -27,7 +27,7 @@ export class UsersModule {
   constructor(
     ngRedux: NgRedux<IAppState>,
     devTools: DevToolsExtension,
-  ){
+  ) {
     ngRedux.configureStore(rootReducer, INITIAL_STATE, null, devTools.isEnabled() ? [ devTools.enhancer() ] : []);
   }
 }

@@ -1,5 +1,8 @@
 <div class="container">
-  <app-search></app-search>
+  <app-search
+    (changeFilter)="changeFilter($event)"
+    [search]="filterUsers"
+    ></app-search>
   <div class="section row">
     <div
       class="col s11"
@@ -9,11 +12,16 @@
     </div>
   </div>
   <ul class="collection">
-    <li class="collection-item avatar" *ngFor='let user of displayedUsers'>
+    <li class="collection-item avatar" *ngFor='let user of users'>
       <app-user
         (deleteUser)='deleteUser($event)'
         [user]='user'>
       </app-user>
     </li>
   </ul>
+   <app-pagination
+    [page]="page"
+    (onPrev)="prevPage()"
+    (onNext)="nextPage()"
+    ></app-pagination> 
 </div>

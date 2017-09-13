@@ -4,17 +4,20 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class UsersService {
-  url: string = 'http://localhost:8000/users';
+  url = 'http://localhost:8000/users';
   users: any[];
 
-  constructor(private http:Http) { }
-  getUsers() {
-    return this.http.get(this.url)
-      .map(resp => resp.json())
+  constructor(private http: Http) { }
+  getUsers(limit, offset, search) {
+    const url = `${this.url}?limit=${limit}&offset=${offset}&search=${search}`;
+    return this.http.get(url)
+      .map(resp => {
+        return resp.json();
+      });
   }
   getUser(id) {
     return this.http.get(`${this.url}/${id}`)
-    .map(resp => resp.json())
+    .map(resp => resp.json());
   }
 
   editUser(user) {
@@ -22,13 +25,12 @@ export class UsersService {
         body = JSON.stringify(user),
         headers = new Headers({'Content-Type': 'application/json'}),
         options = new RequestOptions();
-    
     options.headers = headers;
 
     return this.http.put(url, body, options)
             .map( response => {
               return response.json();
-            })
+            });
   }
 
   createUser(user) {
@@ -40,7 +42,7 @@ export class UsersService {
     return this.http.post(url, body, options)
             .map( response => {
               console.log(response);
-              return response.json()
+              return response.json();
              } );
   }
 
@@ -48,6 +50,6 @@ export class UsersService {
     const url = `${this.url}/${user._id}`;
 
     return this.http.delete(url)
-            .map( response => response.json())
+            .map( response => response.json());
   }
 }

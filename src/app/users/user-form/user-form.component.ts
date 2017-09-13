@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import { Observable }    from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 import { UsersService, DialogService } from '../../services';
 import {User, Address} from '../../models';
@@ -27,7 +27,7 @@ export class UserFormComponent implements OnInit {
       if (data.user) {
         this.user = Object.assign({}, data.user);
         this.originalUser = Object.assign({}, data.user);
-      } else {        
+      } else {
         this.user = new User(null, '', '', '', null,  '', new Address('', '', null));
       }
     });
@@ -53,7 +53,7 @@ export class UserFormComponent implements OnInit {
       )
     );
 
-    let method = this.user._id ? 'editUser' : 'createUser';
+    const method = this.user._id ? 'editUser' : 'createUser';
     this.UsersService[method](user)
       .subscribe(() => {
         this.goBack();

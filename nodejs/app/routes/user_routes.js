@@ -1,9 +1,8 @@
 var ObjectID = require('mongodb').ObjectID;
+const url = require('url');
 
 module.exports = function(app, db) {
   app.post('/users', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     const user = {
       name: req.body.name,
       username: req.body.username,
@@ -25,8 +24,6 @@ module.exports = function(app, db) {
     });
   });
   app.get('/users/:id', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     const id = req.params.id;
     const details = { '_id': new ObjectID(id) };
     db.collection('users').findOne(details, (err, item) => {
@@ -38,15 +35,19 @@ module.exports = function(app, db) {
     });
   });
   app.get('/users', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    console.log(req.query);
+    const begin = +req.query.offset;
+    const end = begin + +req.query.limit;
+    const search = req.query.search || '';
     db.collection('users').find().toArray((err, users) => {
-      res.send(users);
+      const returnedUsers = users
+        .filter(user => user.name.toLowerCase().includes(search.toLowerCase()))
+        .slice(begin, end);
+      const data = Object.assign({}, {users: returnedUsers}, {total: users.length});
+      res.send(data);
     });
   });
   app.delete('/users/:id', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     const id = req.params.id;
     const details = { '_id': new ObjectID(id) };
     db.collection('users').remove(details, (err, item) => {
@@ -58,8 +59,6 @@ module.exports = function(app, db) {
     });
   });
   app.put ('/users/:id', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     const id = req.params.id;
     const details = { '_id': new ObjectID(id) };
     const user = {

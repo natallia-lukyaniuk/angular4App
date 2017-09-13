@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 export class UserComponent implements OnInit {
   @Input() user;
   @Output() deleteUser = new EventEmitter<any>();
-  color: string = 'yellow';
 
   constructor(
     private router: Router
