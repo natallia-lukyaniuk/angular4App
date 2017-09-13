@@ -1,5 +1,5 @@
 <ul class="pagination">
-  <li (click)="prevPage()" class="disabled"><a href="#"><i class="material-icons">chevron_left</i></a></li>
+  <li (click)="prevPage()" [ngClass]="{'disabled': page === 1}" class="waves-effect"><a href="#"><i class="material-icons">chevron_left</i></a></li>
   <li class="waves-effect"><a href="#!">{{page}}/{{pagesCount}}</a></li>
-  <li (click)="nextPage()" class="waves-effect"><a href="#"><i class="material-icons">chevron_right</i></a></li>
+  <li (click)="nextPage()" [ngClass]="{'disabled': page === pagesCount}" class="waves-effect"><a href="#"><i class="material-icons">chevron_right</i></a></li>
 </ul>
