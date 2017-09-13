@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class UsersService {
-  url = 'http://localhost:8000/users';
+  url = 'http://localhost:4000/users';
   users: any[];
 
   constructor(private http: Http) { }
@@ -38,10 +38,8 @@ export class UsersService {
         body = JSON.stringify(user),
         headers = new Headers({'Content-Type': 'application/json'}),
         options = new RequestOptions({headers: headers});
-    console.log(body);
     return this.http.post(url, body, options)
             .map( response => {
-              console.log(response);
               return response.json();
              } );
   }

@@ -21,6 +21,7 @@ export class UsersListComponent implements OnInit {
   limit = 10;
   offset: number;
   unsub: any;
+  pagesCount: number;
 
   constructor(
     private usersService: UsersService,
@@ -41,6 +42,7 @@ export class UsersListComponent implements OnInit {
     this.unsub = this.usersService.getUsers(this.limit, this.offset, this.filterUsers)
       .subscribe(resp => {
           this.totalCount = resp.total;
+          this.pagesCount = Math.ceil(this.totalCount / this.limit);
           this.ngRedux.dispatch({type: 'FETCH_USERS', users: resp.users});
         });
   }

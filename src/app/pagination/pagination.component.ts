@@ -7,13 +7,14 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class PaginationComponent implements OnInit {
   @Input() page: number;
-
+  @Input() pagesCount: number;
   @Output() onPrev = new EventEmitter<boolean>();
   @Output() onNext = new EventEmitter<boolean>();
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.pagesCount);
   }
 
   nextPage() {

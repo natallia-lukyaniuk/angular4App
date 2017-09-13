@@ -35,16 +35,22 @@ module.exports = function(app, db) {
     });
   });
   app.get('/users', (req, res) => {
-    console.log(req.query);
-    const begin = +req.query.offset;
-    const end = begin + +req.query.limit;
     const search = req.query.search || '';
-    db.collection('users').find().toArray((err, users) => {
-      const returnedUsers = users
-        .filter(user => user.name.toLowerCase().includes(search.toLowerCase()))
-        .slice(begin, end);
-      const data = Object.assign({}, {users: returnedUsers}, {total: users.length});
-      res.send(data);
+    const searchRegExp = new RegExp(search, 'i');
+    const details = {'username': searchRegExp };
+    let total = null;
+    const query = db.collection('users')
+      .find(details)
+      .skip(+req.query.offset)
+      .limit(+req.query.limit);
+
+    query.toArray((err, users) => {
+          query.count()
+            .then(count => {
+              total = count;
+              data = Object.assign({}, {users: users}, {total: total});
+              res.send(data);
+            })
     });
   });
   app.delete('/users/:id', (req, res) => {
